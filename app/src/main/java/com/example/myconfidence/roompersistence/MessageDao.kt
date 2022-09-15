@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MessageDao {
     @Query("SELECT * FROM motivational_message_table ORDER BY motivation")
-    fun getAlphabetizedMessages(): Flow<List<Message>>
+    fun getAlphabetizedMessages(): Flow<List<MotivationalMessage>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(message: Message)
+    suspend fun insert(message: MotivationalMessage)
 
     @Query("DELETE FROM motivational_message_table")
     suspend fun deleteAll()

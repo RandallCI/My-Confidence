@@ -6,9 +6,9 @@ import java.lang.IllegalArgumentException
 
 class MessageViewModel(private val repository: MessageRepository): ViewModel() {
 
-    val allMessages: LiveData<List<Message>> = repository.allMessages.asLiveData()
+    val allMessages: LiveData<List<MotivationalMessage>> = repository.allMessages.asLiveData()
 
-    fun insert(message: Message) = viewModelScope.launch() { repository.insertMessage(message) }
+    fun insert(message: MotivationalMessage) = viewModelScope.launch() { repository.insertMessage(message) }
 
 }
 

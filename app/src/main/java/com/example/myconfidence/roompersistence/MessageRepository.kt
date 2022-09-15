@@ -5,11 +5,11 @@ import kotlinx.coroutines.flow.Flow
 
 class MessageRepository(private val messageDao: MessageDao) {
 
-    val allMessages: Flow<List<Message>> = messageDao.getAlphabetizedMessages()
+    val allMessages: Flow<List<MotivationalMessage>> = messageDao.getAlphabetizedMessages()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertMessage(message: Message) {
+    suspend fun insertMessage(message: MotivationalMessage) {
         messageDao.insert(message)
     }
 }

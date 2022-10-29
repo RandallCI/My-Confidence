@@ -2,13 +2,11 @@ package com.example.myconfidence
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myconfidence.roompersistence.MessageViewModel
@@ -55,5 +53,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(applicationContext, R.string.empty_not_saved, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun getTokenForFirebaseMessaging() {
+
     }
 }

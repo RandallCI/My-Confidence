@@ -3,6 +3,7 @@ package com.example.myconfidence
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,10 @@ import com.example.myconfidence.roompersistence.MessageViewModel
 import com.example.myconfidence.roompersistence.MessageViewModelFactory
 import com.example.myconfidence.roompersistence.MotivationalMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.installations.FirebaseInstallations
+import com.google.firebase.messaging.FirebaseMessaging
+
+private const val TAG = "myconfidence"
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +45,9 @@ class MainActivity : AppCompatActivity() {
             val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
             startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
         }
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -56,6 +64,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTokenForFirebaseMessaging() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { regTokenTask ->
+            if (regTokenTask.isSuccessful) {
+                Log.d(TAG, "FCM registration token: ${regTokenTask.result}")
+
+
+            } else {
+                Log.e(
+                    TAG, "Unable to retrieve registration token",
+                    regTokenTask.exception)
+            }
+        }
+        FirebaseInstallations.getInstance().id.addOnCompleteListener { installationIdTask ->
+            if (installationIdTask.isSuccessful) {
+                Log.d(TAG, "Firebase Installations ID: ${installationIdTask.result}")
+
+            } else {
+                Log.e(
+                    TAG, "Unable to retrieve installations ID",
+                    installationIdTask.exception)
+            }
+        }
 
     }
 }

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:hapticFeedbackEnabled="true">
 
     <TextView
         android:id="@+id/message_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_orange_light" />
+        android:layout_height="50dp"
+        android:background="@drawable/custom_rounded_views"
+        android:textSize="24sp"
+        android:fontFamily="casual"
+        android:textColor="@color/black"
+        android:padding="5dp"
+        android:layout_weight="5"
+        android:textFontWeight="50" />
 </LinearLayout>

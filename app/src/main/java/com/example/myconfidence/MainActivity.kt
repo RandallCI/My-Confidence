@@ -1,6 +1,7 @@
 package com.example.myconfidence
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -46,18 +47,17 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
         }
 
-
-
+    getTokenForFirebaseMessaging()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == newMessageActivityRequestCode && resultCode == Activity.RESULT_OK) {
-                 data?.getStringExtra(MessageForToday.MESSAGE_REPLY)?.let {
-                     val theMessage = MotivationalMessage(it)
-                     messageViewModel.insert(theMessage)
-                 }
+            data?.getStringExtra(MessageForToday.MESSAGE_REPLY)?.let {
+                val theMessage = MotivationalMessage(it)
+                messageViewModel.insert(theMessage)
+            }
         } else {
             Toast.makeText(applicationContext, R.string.empty_not_saved, Toast.LENGTH_LONG).show()
         }
@@ -67,8 +67,20 @@ class MainActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { regTokenTask ->
             if (regTokenTask.isSuccessful) {
                 Log.d(TAG, "FCM registration token: ${regTokenTask.result}")
-
-
+                //Set a save location.
+                val firebaseTokenPreferences = getSharedPreferences("Firebase_Token", Context.MODE_PRIVATE)
+                val editToken = firebaseTokenPreferences.edit()
+                //Get the value to be saved.
+                val token = regTokenTask.result
+                editToken.apply {
+                    putString("Token", token)
+                    apply()
+                }
+                //Return the saved token value if it is not null
+                val savedToken = firebaseTokenPreferences.getString("Token", null)
+                if (savedToken != null) {
+                    Log.d(TAG, "The saved token value is: ${savedToken}")
+                }
             } else {
                 Log.e(
                     TAG, "Unable to retrieve registration token",

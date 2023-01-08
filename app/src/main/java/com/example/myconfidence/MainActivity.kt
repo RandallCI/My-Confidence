@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
             startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
+
+
         }
 
     getTokenForFirebaseMessaging()

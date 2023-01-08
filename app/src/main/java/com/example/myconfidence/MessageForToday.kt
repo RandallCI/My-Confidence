@@ -2,12 +2,11 @@ package com.example.myconfidence
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import com.google.android.material.textfield.TextInputEditText
+import androidx.appcompat.app.AppCompatActivity
 
 class MessageForToday : AppCompatActivity() {
 
@@ -22,7 +21,6 @@ class MessageForToday : AppCompatActivity() {
         val saveButton = findViewById<Button>(R.id.save_message)
         saveButton.setOnClickListener {
             val messageIntent = Intent()
-
             if (TextUtils.isEmpty(addNewMessage.text)) {
                 setResult(Activity.RESULT_CANCELED, messageIntent)
             } else {

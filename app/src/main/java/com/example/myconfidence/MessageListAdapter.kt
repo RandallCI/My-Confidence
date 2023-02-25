@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myconfidence.roompersistence.MotivationalMessage
 
-class MessageListAdapter: ListAdapter<MotivationalMessage, MessageListAdapter.MessageViewHolder>(MessagesComparator()) {
+class MessageListAdapter(mainActivity: MainActivity) : ListAdapter<MotivationalMessage, MessageListAdapter.MessageViewHolder>(MessagesComparator()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -35,7 +35,6 @@ class MessageListAdapter: ListAdapter<MotivationalMessage, MessageListAdapter.Me
             }
         }
     }
-
 
     class MessagesComparator : DiffUtil.ItemCallback<MotivationalMessage>() {
         override fun areItemsTheSame(oldItem: MotivationalMessage, newItem: MotivationalMessage): Boolean {

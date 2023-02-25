@@ -4,4 +4,5 @@
     <string name="empty_not_saved">Message not saved.</string>
     <string name="add_word">Add a word.</string>
     <string name="message_for_today">Message for t0day</string>
+    <string name="exit">Exit</string>
 </resources>

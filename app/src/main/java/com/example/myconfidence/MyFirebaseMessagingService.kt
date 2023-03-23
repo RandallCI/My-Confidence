@@ -10,7 +10,23 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
-        Log.d(TAG, "onMessageReceived: message is " + message.data.toString())
+        Log.d(TAG, "onMessageReceived: Key is " + message.data.toString())
+        val newMessage = message.data.toString()
+        //Set a save location.
+        val firebaseMessagePreferences = getSharedPreferences("New_Message", Context.MODE_PRIVATE)
+        val editMessage = firebaseMessagePreferences.edit()
+        //Get the value to be saved.
+        editMessage.apply {
+            putString("The_Message", newMessage)
+            apply()
+        }
+
+        val savedMessage = firebaseMessagePreferences.getString("The_Message", null)
+        if (savedMessage != null) {
+
+            Log.d(TAG, "The new saved message is: $savedMessage")
+
+        }
     }
 
     override fun onNewToken(token: String) {

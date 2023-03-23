@@ -1,8 +1,12 @@
 package com.example.myconfidence
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,10 +35,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.message_recycler_view)
-        val adaptor = MessageListAdapter(this)
+        val adaptor = MessageListAdapter()
+        adaptor.setMessageClickListener(object: MessageListAdapter.MessageClickListener{
+            override fun onMessageClicked(position: Int) {
+                Toast.makeText(this@MainActivity, "You clicked $position", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+        })
         messageViewModel.allMessages.observe(this, Observer { messages ->
             messages.let { adaptor.submitList(it) }
         })
+
 
         recyclerView.adapter = adaptor
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -47,6 +62,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        val firebaseMessagePreferences = getSharedPreferences("New_Message", Context.MODE_PRIVATE)
+        val savedMessage = firebaseMessagePreferences.getString("The_Message", null)
+        Log.d(TAG, "The new saved message is: $savedMessage")
     }
 
 

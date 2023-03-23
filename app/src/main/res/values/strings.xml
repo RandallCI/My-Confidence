@@ -5,4 +5,6 @@
     <string name="add_word">Add a word.</string>
     <string name="message_for_today">Message for t0day</string>
     <string name="exit">Exit</string>
+    <string name="No_text_default">No message received.</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

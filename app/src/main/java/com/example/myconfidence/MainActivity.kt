@@ -19,7 +19,7 @@ import com.example.myconfidence.roompersistence.MotivationalMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val TAG = "myconfidence"
-private const val MESSAGE_DETAIL = "Message Detail."
+const val MESSAGE_DETAIL = "Message Detail."
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         adaptor.setMessageClickListener(object: MessageListAdapter.MessageClickListener{
             override fun onMessageClicked(position: Int) {
                 Toast.makeText(this@MainActivity, "You clicked $position", Toast.LENGTH_LONG).show()
+                val detail = position.toString()
+                goToDetailView(detail)
             }
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -87,9 +89,9 @@ class MainActivity : AppCompatActivity() {
 
     //Mark: Private Methods
 
-    private fun goToDetailView(message: MotivationalMessage) {
+    private fun goToDetailView(message: String) {
         val moreDetail = Intent(this, MessageDetail()::class.java)
-        moreDetail.putExtra(MESSAGE_DETAIL, message.motivation)
+        moreDetail.putExtra(MESSAGE_DETAIL, message)
         this.startActivity(moreDetail)
     }
 

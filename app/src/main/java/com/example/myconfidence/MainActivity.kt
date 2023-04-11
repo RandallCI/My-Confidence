@@ -10,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myconfidence.roompersistence.MessageViewModel
@@ -24,7 +23,7 @@ const val MESSAGE_DETAIL = "Message Detail."
 class MainActivity : AppCompatActivity() {
 
     private val newMessageActivityRequestCode = 1
-
+    private lateinit var items: List<MotivationalMessage>
 
     private val messageViewModel: MessageViewModel by viewModels {
         MessageViewModelFactory((application as MessageApplication).messageRepository)
@@ -38,9 +37,7 @@ class MainActivity : AppCompatActivity() {
         val adaptor = MessageListAdapter()
         adaptor.setMessageClickListener(object: MessageListAdapter.MessageClickListener{
             override fun onMessageClicked(position: Int) {
-                Toast.makeText(this@MainActivity, "You clicked $position", Toast.LENGTH_LONG).show()
-                val detail = position.toString()
-                goToDetailView(detail)
+                goToDetailView(position)
             }
 
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -48,9 +45,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-        messageViewModel.allMessages.observe(this, Observer { messages ->
-            messages.let { adaptor.submitList(it) }
-        })
+        messageViewModel.allMessages.observe(this) { messages ->
+            messages.let {
+                adaptor.submitList(it)
+                items = messages
+            }
+
+        }
 
 
         recyclerView.adapter = adaptor
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         val fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
         fab.setOnClickListener {
             val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
-            startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
+            this.startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
 
 
         }
@@ -89,9 +90,9 @@ class MainActivity : AppCompatActivity() {
 
     //Mark: Private Methods
 
-    private fun goToDetailView(message: String) {
+    private fun goToDetailView(position: Int) {
         val moreDetail = Intent(this, MessageDetail()::class.java)
-        moreDetail.putExtra(MESSAGE_DETAIL, message)
+        moreDetail.putExtra(MESSAGE_DETAIL, items[position])
         this.startActivity(moreDetail)
     }
 

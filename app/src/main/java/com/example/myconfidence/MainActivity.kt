@@ -16,8 +16,10 @@ import com.example.myconfidence.roompersistence.MessageViewModel
 import com.example.myconfidence.roompersistence.MessageViewModelFactory
 import com.example.myconfidence.roompersistence.MotivationalMessage
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-const val TAG = "myconfidence"
+const val TAG = "myConfidence"
 const val MESSAGE_DETAIL = "Message Detail."
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private val messageViewModel: MessageViewModel by viewModels {
         MessageViewModelFactory((application as MessageApplication).messageRepository)
     }
+    // Access a Cloud FireStore instance from your Activity
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +65,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
             this.startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
-
-
+//            setupCloudFireStore()
         }
 
         val firebaseMessagePreferences = getSharedPreferences("New_Message", Context.MODE_PRIVATE)
@@ -94,6 +97,25 @@ class MainActivity : AppCompatActivity() {
         val moreDetail = Intent(this, MessageDetail()::class.java)
         moreDetail.putExtra(MESSAGE_DETAIL, items[position])
         this.startActivity(moreDetail)
+    }
+
+    private fun setupCloudFireStore() {
+        // Create a new user with a first and last name
+        val user = hashMapOf(
+            "first" to "Ada",
+            "last" to "Lovelace",
+            "born" to 1815
+        )
+
+// Add a new document with a generated ID
+        db.collection("users")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
     }
 
 }

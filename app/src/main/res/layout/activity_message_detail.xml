@@ -32,6 +32,7 @@
         android:textAlignment="center"
         android:fontFamily="casual"
         android:textSize="24sp"
+        android:textFontWeight="50"
         android:background="@drawable/custom_rounded_views"
         app:layout_constraintBottom_toTopOf="@+id/exit"
         app:layout_constraintEnd_toEndOf="parent"

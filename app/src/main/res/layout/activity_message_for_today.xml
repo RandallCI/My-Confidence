@@ -6,34 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MessageForToday">
 
-    <EditText
-        android:id="@+id/message_entry_field"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="100dp"
-        android:hint="@string/add_word"
-        android:inputType="textShortMessage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="I, WOW, Great, Amazing, Fabulous, Awesome, Blessed" />
-
     <Button
         android:id="@+id/save_message"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/button_save"
+        android:background="@drawable/custom_rounded_views"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_save"
-        app:layout_constraintTop_toBottomOf="@+id/message_entry_field" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_save" />
 
     <TextView
         android:id="@+id/new_message_text"
@@ -43,8 +27,9 @@
         android:layout_marginTop="@dimen/min_height"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="48sp"
+        android:textSize="36sp"
         android:textStyle="bold"
+        android:background="@drawable/custom_rounded_views"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,27 +38,14 @@
     <Button
         android:id="@+id/cancel_save"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/cancel_button"
+        android:background="@drawable/custom_rounded_views"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/save_message"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_entry_field" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/saveNewRetrievedMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/save_message"
-        android:onClick="saveTheReceivedMessage"
-        app:layout_constraintBottom_toTopOf="@+id/message_entry_field"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_message_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

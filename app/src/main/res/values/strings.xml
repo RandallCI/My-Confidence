@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Confidence</string>
-    <string name="button_save">Save</string>
+    <string name="button_save">Save To List</string>
     <string name="empty_not_saved">Message not saved.</string>
     <string name="add_word">Add a word.</string>
     <string name="message_for_today">Message for t0day</string>

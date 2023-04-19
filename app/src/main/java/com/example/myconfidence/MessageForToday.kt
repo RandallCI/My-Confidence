@@ -8,7 +8,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -16,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 class MessageForToday : AppCompatActivity() {
 
-    private lateinit var addNewMessage: EditText
+
     private lateinit var cancelSave: Button
     private lateinit var newReceivedMessage: TextView
 
@@ -50,7 +49,6 @@ class MessageForToday : AppCompatActivity() {
             newReceivedMessage.text = getString(R.string.No_text_default)
         }
 
-        addNewMessage = findViewById<EditText>(R.id.message_entry_field)
 
 
         cancelSave.setOnClickListener {
@@ -59,10 +57,10 @@ class MessageForToday : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             val messageIntent = Intent()
-            if (TextUtils.isEmpty(addNewMessage.text)) {
+            if (TextUtils.isEmpty(newReceivedMessage.text)) {
                 setResult(Activity.RESULT_CANCELED, messageIntent)
             } else {
-                val message = addNewMessage.text.toString()
+                val message = newReceivedMessage.text.toString()
                 messageIntent.putExtra(MESSAGE_REPLY, message)
                 setResult(Activity.RESULT_OK, messageIntent)
                 finish()
@@ -73,15 +71,7 @@ class MessageForToday : AppCompatActivity() {
     }
 
     fun saveTheReceivedMessage(view: View) {
-        val messageIntent = Intent()
-        if (TextUtils.isEmpty(newReceivedMessage.text)) {
-            setResult(Activity.RESULT_CANCELED, messageIntent)
-        } else {
-            val message = newReceivedMessage.text.toString()
-            messageIntent.putExtra(MESSAGE_REPLY, message)
-            setResult(Activity.RESULT_OK, messageIntent)
-            finish()
-        }
+
     }
 
     private fun retrieveMessagesFromFireStore() {

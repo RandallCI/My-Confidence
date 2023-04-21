@@ -12,4 +12,5 @@
     <string name="message_settings">Message Settings</string>
     <string name="set_notification">Set Notification</string>
     <string name="cancel">Cancel</string>
+    <string name="new_message">New Message</string>
 </resources>

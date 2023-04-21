@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myconfidence.roompersistence.MessageViewModel
 import com.example.myconfidence.roompersistence.MessageViewModelFactory
 import com.example.myconfidence.roompersistence.MotivationalMessage
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -61,12 +60,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adaptor
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
-        fab.setOnClickListener {
-            val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
-            this.startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
-//            setupCloudFireStore()
-        }
+
 
         val firebaseMessagePreferences = getSharedPreferences("New_Message", Context.MODE_PRIVATE)
         val savedMessage = firebaseMessagePreferences.getString("The_Message", null)
@@ -88,6 +82,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun newMessage(view: View) {
+        val newMessageIntent = Intent(this@MainActivity, MessageForToday::class.java)
+        this.startActivityForResult(newMessageIntent, newMessageActivityRequestCode)
+    }
 
     fun messageSettings(view: View) {
         val settingsIntent = Intent(this, MessageSettingsView()::class.java)

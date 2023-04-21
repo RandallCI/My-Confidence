@@ -9,4 +9,7 @@
     <string name="cancel_button">Cancel</string>
     <string name="message_detail">Message Detail</string>
     <string name="save_message">Save Message</string>
+    <string name="message_settings">Message Settings</string>
+    <string name="set_notification">Set Notification</string>
+    <string name="cancel">Cancel</string>
 </resources>

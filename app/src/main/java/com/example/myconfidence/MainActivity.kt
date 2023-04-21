@@ -89,6 +89,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    fun messageSettings(view: View) {
+        val settingsIntent = Intent(this, MessageSettingsView()::class.java)
+        this.startActivity(settingsIntent)
+    }
 
 
     //Mark: Private Methods

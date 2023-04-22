@@ -24,7 +24,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_rounded_views"
-        android:onClick="setTime"
         android:text="@string/set_notification"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

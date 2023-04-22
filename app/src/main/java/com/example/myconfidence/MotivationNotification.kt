@@ -6,13 +6,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 
+const val notificationID = 1
+const val channelID = "Channel_one"
+const val titleExtra = "Title_Extra"
+const val messageExtra = "Message_Extra"
+
 class MotivationNotification: BroadcastReceiver() {
 
     //Properties
-    private val notificationID = 1
-    private val channelID = "Channel_one"
-    private val titleExtra = "Title_Extra"
-    private val messageExtra = "Message_Extra"
+
 
 
     override fun onReceive(p0: Context, p1: Intent?) {
